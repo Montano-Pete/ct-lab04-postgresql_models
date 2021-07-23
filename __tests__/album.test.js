@@ -21,7 +21,7 @@ describe('album routes', () => {
     });
   });
 
-  it('gets a dog by id via GET', async () => {
+  it('gets an album by id via GET', async () => {
     const oddments = await Album.insert({
       name: 'Oddments',
       artist: 'King Gizzard & The Lizard Wizard',
@@ -31,5 +31,32 @@ describe('album routes', () => {
     const res = await request(app).get(`/api/v1/albums/${oddments.id}`);
 
     expect(res.body).toEqual(oddments);
+  });
+
+  it('gets all albums via GET', async () => {
+    const yeezus = await Album.insert({
+      name: 'Yeezus',
+      artist: 'Kanye West',
+      yearReleased: 2013
+    });
+    const oddments = await Album.insert({
+      name: 'Oddments',
+      artist: 'King Gizzard and the Lizard Wizard',
+      yearReleased: 2014
+    });
+    const abbeyRoad = await Album.insert({
+      name: 'Abbey Road',
+      artist: 'The Beatles',
+      yearReleased: 1969
+    });
+    const roomOnFire = await Album.insert({
+      name: 'Room On Fire',
+      artist: 'The Strokes',
+      yearReleased: 2003
+    });
+
+    const res = await request(app).get('/api/v1/albums');
+
+    expect(res.body).toEqual([yeezus, oddments, abbeyRoad, roomOnFire]);
   });
 });
