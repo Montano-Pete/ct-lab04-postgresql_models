@@ -5,4 +5,4 @@ CREATE TABLE albums (
   name TEXT NOT NULL,
   artist TEXT NOT NULL,
   year_released INTEGER NOT NULL
-)
+);
