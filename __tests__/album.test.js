@@ -59,4 +59,21 @@ describe('album routes', () => {
 
     expect(res.body).toEqual([yeezus, oddments, abbeyRoad, roomOnFire]);
   });
+
+  it('updates an album by id via PUT', async () => {
+    const roomOnFire = await Album.insert({
+      name: 'Room On Fire',
+      artist: 'The Strokes',
+      yearReleased: 2005 //wrong year
+    });
+
+    const res = request(app)
+      .put(`/api/v1/albums/${roomOnFire.id}`)
+      .send({ yearReleased: 2003 }); //update to correct year
+
+    expect(res.body).toEqual({
+      ...roomOnFire,
+      yearReleased: 2003,
+    });
+  });
 });
