@@ -67,7 +67,7 @@ describe('album routes', () => {
       yearReleased: 2005 //wrong year
     });
 
-    const res = request(app)
+    const res = await request(app)
       .put(`/api/v1/albums/${roomOnFire.id}`)
       .send({ yearReleased: 2003 }); //update to correct year
 
