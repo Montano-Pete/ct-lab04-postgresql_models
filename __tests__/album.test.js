@@ -76,4 +76,19 @@ describe('album routes', () => {
       yearReleased: 2003,
     });
   });
+
+  it('delets an album by id via DELETE', async () => {
+    const roomOnFire = await Album.insert({
+      name: 'Room On Fire',
+      artist: 'The Strokes',
+      yearReleased: 2003
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/albums/${roomOnFire.id}`);
+
+    expect(res.body).toEqual({
+      message: `You deleted ${roomOnFire.id}, one of the greatest albums ever made :(`
+    });
+  });
 });
