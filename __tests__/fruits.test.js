@@ -32,4 +32,31 @@ describe('fruit routes', () => {
 
     expect(res.body).toEqual(fruit);
   });
+
+  it('gets all fruits via GET', async () => {
+    const lemon = await Fruit.insert({
+      name: 'Lemon',
+      sweet: false,
+      treeFruit: true
+    });
+    const watermelon = await Fruit.insert({
+      name: 'Watermelon',
+      sweet: true,
+      treeFruit: false
+    });
+    const grannySmithApple = await Fruit.insert({
+      name: 'Granny Smith Apple',
+      sweet: false,
+      treeFruit: true
+    });
+    const blueberry = await Fruit.insert({
+      name: 'Blueberry',
+      sweet: true,
+      treeFruit: false
+    });
+
+    const res = await request(app).get('/api/v1/fruits');
+
+    expect(res.body).toEqual([lemon, watermelon, grannySmithApple, blueberry]);
+  });
 });
