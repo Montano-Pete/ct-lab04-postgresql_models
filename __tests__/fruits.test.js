@@ -76,4 +76,19 @@ describe('fruit routes', () => {
       sweet: false
     });
   });
+
+  it('deletes a fruit by id via DELETE', async () => {
+    const fruit = await Fruit.insert({
+      name: 'Lemon',
+      sweet: false,
+      treeFruit: true
+    });
+    
+    const res = await request(app)
+      .delete(`/api/v1/fruit/${fruit.id}`);
+
+    expect(res.body).toEqual({
+      message: `You deleted ${fruit.id}, no lemon bars for you!`
+    });
+  });
 });
