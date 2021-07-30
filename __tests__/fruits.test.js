@@ -20,4 +20,16 @@ describe('fruit routes', () => {
       ...fruit
     });
   });
+
+  it('gets a fruit by id via GET', async () => {
+    const fruit = await Fruit.insert({
+      name: 'Lemon',
+      sweet: false,
+      treeFruit: true
+    });
+
+    const res = await request(app).get(`/api/v1/fruits/${fruit.id}`);
+
+    expect(res.body).toEqual(fruit);
+  });
 });
