@@ -85,7 +85,7 @@ describe('fruit routes', () => {
     });
     
     const res = await request(app)
-      .delete(`/api/v1/fruit/${fruit.id}`);
+      .delete(`/api/v1/fruits/${fruit.id}`);
 
     expect(res.body).toEqual({
       message: `You deleted ${fruit.id}, no lemon bars for you!`
