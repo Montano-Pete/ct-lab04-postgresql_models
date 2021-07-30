@@ -58,4 +58,28 @@ describe('pie routes', () => {
 
     expect(res.body).toEqual([marionberry, apple, chocolate]);
   });
+
+  it('updates a pie by id via PUT', async () => {
+    const pie = await Pie.insert({
+      type: 'Lemon Meringue',
+      wholePie: true, // incorrect order
+      slice: false,
+      sliceQuantity: 0
+    });
+
+    const res = await request(app)
+      .put(`/api/v1/pies/${pie.id}`)
+      .send({
+        wholePie: false, // correct order
+        slice: true,
+        sliceQuantity: 2
+      });
+
+    expect(res.body).toEqual({
+      ...pie,
+      wholePie: false,
+      slice: true,
+      sliceQuantity: 2
+    });
+  });
 });
