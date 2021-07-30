@@ -95,7 +95,7 @@ describe('pie routes', () => {
       .delete(`/api/v1/pies/${pie.id}`);
 
     expect(res.body).toEqual({
-      message: `You deleted ${pie.id}, we cannot be friends..`
+      message: `You deleted ${pie.type}, we cannot be friends..`
     });
   });
 });
