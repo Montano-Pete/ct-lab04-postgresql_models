@@ -34,7 +34,7 @@ describe('pie routes', () => {
     expect(res.body).toEqual(pie);
   });
 
-  it('gets all pies by id via GET', async () => {
+  it('gets all pies via GET', async () => {
     const marionberry = await Pie.insert({
       type: 'Marionberry',
       wholePie: false,
@@ -80,6 +80,22 @@ describe('pie routes', () => {
       wholePie: false,
       slice: true,
       sliceQuantity: 2
+    });
+  });
+
+  it('deletes a pie by id via DELETE', async () => {
+    const pie = await Pie.insert({
+      type: 'Lemon Meringue',
+      wholePie: true,
+      slice: false,
+      sliceQuantity: 0
+    });
+    
+    const res = await request(app)
+      .delete(`/api/v1/pies/${pie.id}`);
+
+    expect(res.body).toEqual({
+      message: `You deleted ${pie.id}, we cannot be friends..`
     });
   });
 });
