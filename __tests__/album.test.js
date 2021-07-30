@@ -77,8 +77,6 @@ describe('album routes', () => {
     });
   });
 
-  // TEST BELOW CURRENTLY DOES NOT PASS
-
   it('deletes an album by id via DELETE', async () => {
     const roomOnFire = await Album.insert({
       name: 'Room On Fire',
