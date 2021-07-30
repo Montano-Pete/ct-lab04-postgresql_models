@@ -33,4 +33,29 @@ describe('pie routes', () => {
 
     expect(res.body).toEqual(pie);
   });
+
+  it('gets all pies by id via GET', async () => {
+    const marionberry = await Pie.insert({
+      type: 'Marionberry',
+      wholePie: false,
+      slice: true,
+      sliceQuantity: 3
+    });
+    const apple = await Pie.insert({
+      type: 'Apple',
+      wholePie: true,
+      slice: false,
+      sliceQuantity: 0
+    });
+    const chocolate = await Pie.insert({
+      type: 'Chocolate',
+      wholePie: false,
+      slice: true,
+      sliceQuantity: 1
+    });
+
+    const res = await request(app).get('/api/v1/pies/');
+
+    expect(res.body).toEqual([marionberry, apple, chocolate]);
+  });
 });
