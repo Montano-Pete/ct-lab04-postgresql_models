@@ -20,4 +20,17 @@ describe('pie routes', () => {
       ...pie
     });
   });
+
+  it('gets a pie by id via GET', async () => {
+    const pie = await Pie.insert({
+      type: 'Lemon Meringue',
+      wholePie: true,
+      slice: false,
+      sliceQuantity: 0
+    });
+
+    const res = await request(app).get(`/api/v1/pies/${pie.id}`);
+
+    expect(res.body).toEqual(pie);
+  });
 });
