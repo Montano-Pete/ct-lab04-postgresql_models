@@ -59,4 +59,21 @@ describe('fruit routes', () => {
 
     expect(res.body).toEqual([lemon, watermelon, grannySmithApple, blueberry]);
   });
+
+  it('updates a fruit by id via PUT', async () => {
+    const fruit = await Fruit.insert({
+      name: 'Lemon',
+      sweet: true, // incorrect
+      treeFruit: true
+    });
+
+    const res = await request(app)
+      .put(`/api/v1/fruits/${fruit.id}`)
+      .send({ sweet: false }); // correct
+
+    expect(res.body).toEqual({
+      ...fruit,
+      sweet: false
+    });
+  });
 });
