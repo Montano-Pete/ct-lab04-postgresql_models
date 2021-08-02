@@ -69,4 +69,23 @@ describe('book routes', () => {
 
     expect(res.body).toEqual([alchemist, threeBodyProblem, mockingbird]);
   });
+
+  it('updates a book by id via PUT', async () => {
+    const threeBodyProblem = await Book.insert({
+      title: 'The Three-Body Problem',
+      author: 'Cixin Liu',
+      genre: 'History', // wrong genre
+      isbn10: '9780765382030',
+      pageCount: 416
+    });
+
+    const res = await request(app)
+      .put(`/api/v1/books/${threeBodyProblem.id}`)
+      .send({ genre: 'Science-Fiction' }); //update to correct genre
+
+    expect(res.body).toEqual({
+      ...threeBodyProblem,
+      genre: 'Science-Fiction'
+    });
+  });
 });
