@@ -41,12 +41,12 @@ describe('movie routes', () => {
   });
 
   it('gets all movies via GET', async () => {
-    const darkKnight = {
+    const darkKnight = await Movie.insert({
       title: 'The Dark Knight',
       director: 'Christopher Nolan',
       yearReleased: 2008,
       domesticBoxOffice: '$534,858,444'
-    };
+    });
     const shawshank = await Movie.insert({
       title: 'The Shawshank Redemption',
       director: 'Frank Darabont',
