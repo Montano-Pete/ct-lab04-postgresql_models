@@ -88,4 +88,21 @@ describe('book routes', () => {
       genre: 'Science-Fiction'
     });
   });
+
+  it('deletes a book by id via DELETE', async () => {
+    const threeBodyProblem = await Book.insert({
+      title: 'The Three-Body Problem',
+      author: 'Cixin Liu',
+      genre: 'Science-Fiction',
+      isbn10: '9780765382030',
+      pageCount: 416
+    });
+    
+    const res = await request(app)
+      .delete(`/api/v1/books/${threeBodyProblem.id}`);
+
+    expect(res.body).toEqual({
+      message: `You deleted ${threeBodyProblem.title}, one of my favorite books. I am sad.`
+    });
+  });
 });
