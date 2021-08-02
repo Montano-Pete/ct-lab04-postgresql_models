@@ -88,4 +88,20 @@ describe('movie routes', () => {
       director: 'Ridley Scott'
     });
   });
+
+  it('deletes a movie by id via DELETE', async () => {
+    const bladeRunner = await Movie.insert({
+      title: 'Blade Runner',
+      director: 'Ridley Scott',
+      yearReleased: 1982,
+      domesticBoxOffice: '$32,868,943'
+    });
+    
+    const res = await request(app)
+      .delete(`/api/v1/movies/${bladeRunner.id}`);
+
+    expect(res.body).toEqual({
+      message: `You deleted ${bladeRunner.title}, one of the greatest movies ever made :(`
+    });
+  });
 });
