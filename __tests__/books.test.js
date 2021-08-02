@@ -27,4 +27,18 @@ describe('book routes', () => {
       ...book
     });
   });
+
+  it('gets a book by id via GET', async () => {
+    const book = await Book.insert({
+      title: 'The Three-Body Problem',
+      author: 'Cixin Liu',
+      genre: 'Science-Fiction',
+      isbn10: '9780765382030',
+      pageCount: 416
+    });
+
+    const res = await request(app).get(`/api/v1/books/${book.id}`);
+
+    expect(res.body).toEqual(book);
+  });
 });
