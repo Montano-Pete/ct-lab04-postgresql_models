@@ -77,13 +77,13 @@ describe('album routes', () => {
     });
   });
 
-  it('delets an album by id via DELETE', async () => {
+  it('deletes an album by id via DELETE', async () => {
     const roomOnFire = await Album.insert({
       name: 'Room On Fire',
       artist: 'The Strokes',
       yearReleased: 2003
     });
-
+    
     const res = await request(app)
       .delete(`/api/v1/albums/${roomOnFire.id}`);
 
