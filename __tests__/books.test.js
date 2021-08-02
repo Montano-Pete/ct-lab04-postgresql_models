@@ -14,7 +14,7 @@ describe('book routes', () => {
       title: 'The Alchemist',
       author: 'Paulo Coelho',
       genre: 'Fantasy',
-      isbn10: 9780061122415,
+      isbn10: '9780061122415',
       pageCount: 197
     };
 
