@@ -29,6 +29,6 @@ CREATE TABLE movies (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title TEXT NOT NULL,
   director TEXT NOT NULL,
-  year_released INTEGER NOT NULL
-  domestic_box_office INTEGER NOT NULL
+  year_released INTEGER NOT NULL,
+  domestic_box_office TEXT NOT NULL
 );
