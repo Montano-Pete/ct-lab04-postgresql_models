@@ -70,4 +70,22 @@ describe('movie routes', () => {
 
     expect(res.body).toEqual([darkKnight, shawshank, jurassicPark, bladeRunner]);
   });
+
+  it('updates a movie by id via PUT', async () => {
+    const bladeRunner = await Movie.insert({
+      title: 'Blade Runner',
+      director: 'Steven Spielberg', // wrong director
+      yearReleased: 1982,
+      domesticBoxOffice: '$32,868,943'
+    });
+
+    const res = await request(app)
+      .put(`/api/v1/movies/${bladeRunner.id}`)
+      .send({ director: 'Ridley Scott' }); //update to correct director
+
+    expect(res.body).toEqual({
+      ...bladeRunner,
+      director: 'Ridley Scott'
+    });
+  });
 });
