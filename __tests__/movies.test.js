@@ -26,4 +26,17 @@ describe('movie routes', () => {
       ...movie
     });
   });
+
+  it('gets a movie by id via GET', async () => {
+    const movie = await Movie.insert({
+      title: 'The Shawshank Redemption',
+      director: 'Frank Darabont',
+      yearReleased: 1994,
+      domesticBoxOffice: '$28,699,976'
+    });
+
+    const res = await request(app).get(`/api/v1/movies/${movie.id}`);
+
+    expect(res.body).toEqual(movie);
+  });
 });
