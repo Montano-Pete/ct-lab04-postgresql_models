@@ -41,4 +41,32 @@ describe('book routes', () => {
 
     expect(res.body).toEqual(book);
   });
+
+  it('gets all books via GET', async () => {
+    const alchemist = await Book.insert({
+      title: 'The Alchemist',
+      author: 'Paulo Coelho',
+      genre: 'Fantasy',
+      isbn10: '9780061122415',
+      pageCount: 197
+    });
+    const threeBodyProblem = await Book.insert({
+      title: 'The Three-Body Problem',
+      author: 'Cixin Liu',
+      genre: 'Science-Fiction',
+      isbn10: '9780765382030',
+      pageCount: 416
+    });
+    const mockingbird = await Book.insert({
+      title: 'To Kill A Mockingbird',
+      author: 'Lee Haprer',
+      genre: 'Bildungsroman',
+      isbn10: '0060935464',
+      pageCount: 336
+    });
+
+    const res = await request(app).get('/api/v1/books');
+
+    expect(res.body).toEqual([alchemist, threeBodyProblem, mockingbird]);
+  });
 });
